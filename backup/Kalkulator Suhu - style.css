@@ -1,0 +1,133 @@
+/* style.css */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Custom focus style for better visibility */
+.custom-focus:focus {
+    /* Tailwind classes would ideally be used here if not for specificity,
+       but for external CSS, standard CSS is fine.
+       These are equivalent to Tailwind's ring-offset-2 ring-2 ring-indigo-500 border-indigo-500 */
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--tw-ring-offset-color, #fff), 0 0 0 calc(2px + 2px) var(--tw-ring-color, #6366f1), 0 0 #0000;
+    border-color: #6366f1; /* indigo-500 */
+}
+
+/* Hide number input arrows */
+.input-arrow::-webkit-outer-spin-button,
+.input-arrow::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-arrow {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+/*
+  The .btn class uses Tailwind's @apply directive.
+  If you are NOT using a Tailwind CSS build process that processes this file,
+  @apply will NOT work. In that case, you'd need to replace these
+  with standard CSS equivalents or ensure Tailwind processes this CSS file.
+
+  For simplicity in a static setup without a build step for CSS,
+  it's often better to keep utility classes directly in HTML or
+  use Tailwind's CDN features that allow some @apply usage in <style> tags
+  if configured, or manually write out the CSS properties.
+
+  Assuming Tailwind's CDN might not process @apply in linked files directly without setup,
+  here's an example of how you might write out the .btn styles if @apply isn't working.
+  However, since Tailwind is loaded via CDN in the HTML, it's best to keep these utility
+  classes on the button elements themselves in the HTML for direct application by Tailwind.
+
+  If you have a build setup (like PostCSS with Tailwind), @apply in this file is fine.
+  For this example, I'll leave the @apply as it was in the original <style> tag,
+  assuming it might be part of a project where Tailwind processes CSS files,
+  or acknowledging that for a simple CDN setup, these styles might be better
+  applied directly in HTML or within a <style> tag in the HTML.
+*/
+.btn {
+    /* These would be Tailwind classes:
+       w-full sm:w-auto text-white font-semibold py-3 px-6 rounded-lg
+       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800
+       transition duration-150 ease-in-out transform hover:scale-105 active:scale-95
+    */
+    /* Example of manual translation (adjust as needed): */
+    width: 100%;
+    color: white;
+    font-weight: 600; /* semibold */
+    padding-top: 0.75rem; /* py-3 */
+    padding-bottom: 0.75rem; /* py-3 */
+    padding-left: 1.5rem; /* px-6 */
+    padding-right: 1.5rem; /* px-6 */
+    border-radius: 0.5rem; /* rounded-lg */
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* Specific button styling will still rely on Tailwind classes in HTML for background colors etc. */
+
+@media (min-width: 640px) { /* sm: breakpoint */
+    .btn {
+        width: auto;
+    }
+}
+
+.btn:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    /* focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 */
+    /* The ring color (e.g., focus:ring-green-500) is specific to each button in HTML */
+}
+
+.btn:hover {
+    /* transform hover:scale-105 */
+    transform: scale(1.05);
+}
+.btn:active {
+    /* active:scale-95 */
+    transform: scale(0.95);
+}
+
+/* Note: The @apply directive for .btn is problematic in a plain linked CSS file
+   if you're only using the Tailwind CDN without a build step.
+   It's generally better to apply Tailwind utility classes directly to the HTML elements.
+   I've kept the .btn definition here to show where it *would* go, but for it to work
+   as intended with @apply, a Tailwind build process is usually needed.
+   Alternatively, you can manually write out the CSS properties that @apply would generate,
+   or simply rely on applying all Tailwind classes directly in the HTML.
+   For the .btn class, the Tailwind classes are already applied on the buttons in the HTML,
+   so this .btn definition in style.css might be redundant or could be simplified/removed
+   if all styling is handled by direct Tailwind classes in the HTML.
+   I'll remove the @apply for .btn and assume utilities are handled by HTML classes.
+*/
+
+/* Minimal CSS in style.css if Tailwind handles most utilities */
+body {
+    font-family: 'Inter', sans-serif;
+    /* Tailwind handles bg, text color, flex, etc. in the HTML body tag */
+}
+
+.custom-focus:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    /* These values are for indigo-500. You might need to adjust if other focus colors are used. */
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    border-color: #6366f1; /* Equivalent to border-indigo-500 */
+    --tw-ring-color: #6366f1; /* Equivalent to ring-indigo-500 */
+    --tw-ring-offset-width: 2px; /* Equivalent to ring-offset-2 */
+}
+
+.input-arrow::-webkit-outer-spin-button,
+.input-arrow::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-arrow {
+    -moz-appearance: textfield; /* Firefox */
+}

@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Suhu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom focus style for better visibility */
+        .custom-focus:focus {
+            ring-offset-2 ring-2 ring-indigo-500 border-indigo-500;
+        }
+        .input-arrow::-webkit-outer-spin-button,
+        .input-arrow::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .input-arrow {
+            -moz-appearance: textfield; /* Firefox */
+        }
+        .btn {
+            @apply w-full sm:w-auto text-white font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 transition duration-150 ease-in-out transform hover:scale-105 active:scale-95;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100 flex items-center justify-center min-h-screen p-4 selection:bg-indigo-500 selection:text-white">
+
+    <div class="bg-slate-800 shadow-2xl rounded-xl p-6 md:p-10 w-full max-w-lg transform transition-all duration-500 hover:scale-[1.01]">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">Kalkulator Suhu</h1>
+            <p class="text-slate-400 mt-2 text-sm">Konversi suhu antara Celsius dan Fahrenheit.</p>
+        </div>
+
+        <div class="space-y-6">
+            <div>
+                <label for="celsius" class="block text-sm font-medium text-slate-300 mb-1">Celcius (°C)</label>
+                <input type="number" id="celsius" name="celsius" class="input-arrow custom-focus w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-150 ease-in-out" placeholder="Masukkan suhu dalam Celsius">
+            </div>
+
+            <div>
+                <label for="fahrenheit" class="block text-sm font-medium text-slate-300 mb-1">Fahrenheit (°F)</label>
+                <input type="number" id="fahrenheit" name="fahrenheit" class="input-arrow custom-focus w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-150 ease-in-out" placeholder="Masukkan suhu dalam Fahrenheit">
+            </div>
+        </div>
+
+        <div class="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-3">
+            <button id="convertButton" class="btn bg-green-600 hover:bg-green-700 focus:ring-green-500">
+                Konversi
+            </button>
+            <button id="reverseButton" class="btn bg-sky-500 hover:bg-sky-600 focus:ring-sky-400">
+                Reverse
+            </button>
+            <button id="clearButton" class="btn bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500">
+                Reset
+            </button>
+        </div>
+
+        <div id="resultArea" class="mt-6 text-center text-slate-400 min-h-[1.5em]">
+            </div>
+
+        <div class="mt-8 pt-6 border-t border-slate-700">
+            <h2 class="text-xl font-semibold text-slate-200 mb-4 text-center">Cara Kalkulasi</h2>
+            <div class="bg-slate-700/50 p-4 rounded-lg space-y-3 text-sm text-slate-300">
+                <p><strong class="text-indigo-400">Dari Celsius ke Fahrenheit:</strong></p>
+                <p class="ml-4"><code>F = (C × 9/5) + 32</code></p>
+                <p><strong class="text-pink-400">Dari Fahrenheit ke Celsius:</strong></p>
+                <p class="ml-4"><code>C = (F − 32) × 5/9</code></p>
+            </div>
+        </div>
+
+        <footer class="mt-10 text-center text-xs text-slate-500">
+            <p>&copy; <span id="currentYear"></span> Kalkulator Suhu. Dibuat dengan Tailwind CSS & JavaScript.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const celsiusInput = document.getElementById('celsius');
+        const fahrenheitInput = document.getElementById('fahrenheit');
+        const convertButton = document.getElementById('convertButton');
+        const reverseButton = document.getElementById('reverseButton');
+        const clearButton = document.getElementById('clearButton');
+        const resultArea = document.getElementById('resultArea');
+        const currentYearSpan = document.getElementById('currentYear');
+
+        // Set current year in footer
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
+        // --- Conversion Functions ---
+        /**
+         * Converts Celsius to Fahrenheit.
+         * @param {number} celsius - Temperature in Celsius.
+         * @returns {number} Temperature in Fahrenheit.
+         */
+        function celsiusToFahrenheit(celsius) {
+            return (celsius * 9/5) + 32;
+        }
+
+        /**
+         * Converts Fahrenheit to Celsius.
+         * @param {number} fahrenheit - Temperature in Fahrenheit.
+         * @returns {number} Temperature in Celsius.
+         */
+        function fahrenheitToCelsius(fahrenheit) {
+            return (fahrenheit - 32) * 5/9;
+        }
+
+        // --- Event Listeners ---
+
+        // Listen for click on Convert button
+        convertButton.addEventListener('click', function() {
+            const cValStr = celsiusInput.value;
+            const fValStr = fahrenheitInput.value;
+            resultArea.textContent = ''; // Clear previous messages
+
+            if (cValStr !== '') {
+                const cVal = parseFloat(cValStr);
+                if (!isNaN(cVal)) {
+                    const fValConverted = celsiusToFahrenheit(cVal);
+                    fahrenheitInput.value = parseFloat(fValConverted.toFixed(2));
+                } else {
+                    resultArea.textContent = 'Masukkan angka yang valid untuk Celsius.';
+                    fahrenheitInput.value = ''; // Clear fahrenheit if celsius is invalid
+                }
+            } else if (fValStr !== '') {
+                const fVal = parseFloat(fValStr);
+                if (!isNaN(fVal)) {
+                    const cValConverted = fahrenheitToCelsius(fVal);
+                    celsiusInput.value = parseFloat(cValConverted.toFixed(2));
+                } else {
+                    resultArea.textContent = 'Masukkan angka yang valid untuk Fahrenheit.';
+                    celsiusInput.value = ''; // Clear celsius if fahrenheit is invalid
+                }
+            } else {
+                resultArea.textContent = 'Masukkan suhu di salah satu kolom untuk dikonversi.';
+            }
+        });
+
+        // Listen for click on Reverse button
+        reverseButton.addEventListener('click', function() {
+            const cVal = celsiusInput.value;
+            const fVal = fahrenheitInput.value;
+
+            celsiusInput.value = fVal;
+            fahrenheitInput.value = cVal;
+            resultArea.textContent = 'Nilai suhu berhasil ditukar.';
+            // Clear message after a short delay
+            setTimeout(() => {
+                if (resultArea.textContent === 'Nilai suhu berhasil ditukar.') {
+                     resultArea.textContent = '';
+                }
+            }, 2000);
+        });
+
+        // Listen for click on Clear button
+        clearButton.addEventListener('click', function() {
+            celsiusInput.value = '';
+            fahrenheitInput.value = '';
+            resultArea.textContent = ''; // Clear any messages
+            celsiusInput.focus(); // Set focus back to Celsius input
+        });
+
+        // Optional: Clear the other field if one is manually changed to empty,
+        // to prevent confusion before pressing "Konversi"
+        celsiusInput.addEventListener('input', function() {
+            if (celsiusInput.value === '') {
+                // fahrenheitInput.value = ''; // Uncomment if you want to clear fahrenheit when celsius is cleared
+                resultArea.textContent = ''; // Clear messages if user starts typing
+            }
+        });
+
+        fahrenheitInput.addEventListener('input', function() {
+            if (fahrenheitInput.value === '') {
+                // celsiusInput.value = ''; // Uncomment if you want to clear celsius when fahrenheit is cleared
+                resultArea.textContent = ''; // Clear messages if user starts typing
+            }
+        });
+
+    </script>
+
+</body>
+</html>
