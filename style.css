@@ -1,133 +1,108 @@
 /* style.css */
+/* Gaya dasar untuk body, font diambil dari Google Fonts di HTML */
 body {
     font-family: 'Inter', sans-serif;
+    /* Tailwind CSS menangani warna latar belakang, warna teks, flexbox, dll., langsung di tag body pada HTML */
 }
 
-/* Custom focus style for better visibility */
-.custom-focus:focus {
-    /* Tailwind classes would ideally be used here if not for specificity,
-       but for external CSS, standard CSS is fine.
-       These are equivalent to Tailwind's ring-offset-2 ring-2 ring-indigo-500 border-indigo-500 */
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    box-shadow: 0 0 0 2px var(--tw-ring-offset-color, #fff), 0 0 0 calc(2px + 2px) var(--tw-ring-color, #6366f1), 0 0 #0000;
-    border-color: #6366f1; /* indigo-500 */
-}
-
-/* Hide number input arrows */
-.input-arrow::-webkit-outer-spin-button,
-.input-arrow::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.input-arrow {
-    -moz-appearance: textfield; /* Firefox */
-}
-
-/*
-  The .btn class uses Tailwind's @apply directive.
-  If you are NOT using a Tailwind CSS build process that processes this file,
-  @apply will NOT work. In that case, you'd need to replace these
-  with standard CSS equivalents or ensure Tailwind processes this CSS file.
-
-  For simplicity in a static setup without a build step for CSS,
-  it's often better to keep utility classes directly in HTML or
-  use Tailwind's CDN features that allow some @apply usage in <style> tags
-  if configured, or manually write out the CSS properties.
-
-  Assuming Tailwind's CDN might not process @apply in linked files directly without setup,
-  here's an example of how you might write out the .btn styles if @apply isn't working.
-  However, since Tailwind is loaded via CDN in the HTML, it's best to keep these utility
-  classes on the button elements themselves in the HTML for direct application by Tailwind.
-
-  If you have a build setup (like PostCSS with Tailwind), @apply in this file is fine.
-  For this example, I'll leave the @apply as it was in the original <style> tag,
-  assuming it might be part of a project where Tailwind processes CSS files,
-  or acknowledging that for a simple CDN setup, these styles might be better
-  applied directly in HTML or within a <style> tag in the HTML.
-*/
-.btn {
-    /* These would be Tailwind classes:
-       w-full sm:w-auto text-white font-semibold py-3 px-6 rounded-lg
-       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800
-       transition duration-150 ease-in-out transform hover:scale-105 active:scale-95
-    */
-    /* Example of manual translation (adjust as needed): */
-    width: 100%;
-    color: white;
-    font-weight: 600; /* semibold */
-    padding-top: 0.75rem; /* py-3 */
-    padding-bottom: 0.75rem; /* py-3 */
-    padding-left: 1.5rem; /* px-6 */
-    padding-right: 1.5rem; /* px-6 */
-    border-radius: 0.5rem; /* rounded-lg */
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-}
-
-/* Specific button styling will still rely on Tailwind classes in HTML for background colors etc. */
-
-@media (min-width: 640px) { /* sm: breakpoint */
-    .btn {
-        width: auto;
-    }
-}
-
-.btn:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    /* focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 */
-    /* The ring color (e.g., focus:ring-green-500) is specific to each button in HTML */
-}
-
-.btn:hover {
-    /* transform hover:scale-105 */
-    transform: scale(1.05);
-}
-.btn:active {
-    /* active:scale-95 */
-    transform: scale(0.95);
-}
-
-/* Note: The @apply directive for .btn is problematic in a plain linked CSS file
-   if you're only using the Tailwind CDN without a build step.
-   It's generally better to apply Tailwind utility classes directly to the HTML elements.
-   I've kept the .btn definition here to show where it *would* go, but for it to work
-   as intended with @apply, a Tailwind build process is usually needed.
-   Alternatively, you can manually write out the CSS properties that @apply would generate,
-   or simply rely on applying all Tailwind classes directly in the HTML.
-   For the .btn class, the Tailwind classes are already applied on the buttons in the HTML,
-   so this .btn definition in style.css might be redundant or could be simplified/removed
-   if all styling is handled by direct Tailwind classes in the HTML.
-   I'll remove the @apply for .btn and assume utilities are handled by HTML classes.
-*/
-
-/* Minimal CSS in style.css if Tailwind handles most utilities */
-body {
-    font-family: 'Inter', sans-serif;
-    /* Tailwind handles bg, text color, flex, etc. in the HTML body tag */
-}
-
+/* Gaya fokus kustom untuk input agar lebih terlihat */
 .custom-focus:focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
-    /* These values are for indigo-500. You might need to adjust if other focus colors are used. */
+    /* Variabel ini meniru efek ring dari Tailwind CSS */
     --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-    border-color: #6366f1; /* Equivalent to border-indigo-500 */
-    --tw-ring-color: #6366f1; /* Equivalent to ring-indigo-500 */
-    --tw-ring-offset-width: 2px; /* Equivalent to ring-offset-2 */
+    border-color: #6366f1; /* Warna border setara dengan border-indigo-500 */
+    --tw-ring-color: #6366f1; /* Warna ring setara dengan ring-indigo-500 */
+    --tw-ring-offset-width: 2px; /* Lebar offset ring setara dengan ring-offset-2 */
+    /* Warna offset ring disesuaikan dengan latar belakang elemen induk (slate-800 dari div utama) */
+    --tw-ring-offset-color: #1e293b; 
 }
 
+/* Sembunyikan panah pada input number di browser berbasis WebKit */
 .input-arrow::-webkit-outer-spin-button,
 .input-arrow::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
+/* Sembunyikan panah pada input number untuk Firefox */
 .input-arrow {
-    -moz-appearance: textfield; /* Firefox */
+    -moz-appearance: textfield;
 }
+
+/* Gaya untuk bagian artikel baru.
+Sebagian besar gaya seperti padding, warna teks, dll., diterapkan langsung 
+menggunakan kelas utilitas Tailwind CSS di file HTML.
+*/
+.article2 {
+    line-height: 1.6; /* Meningkatkan keterbacaan teks di dalam artikel */
+    /* Kelas Tailwind seperti p-4, rounded-lg, text-slate-300, bg-slate-700/50 
+       sudah diterapkan pada tag <article> di HTML. */
+}
+
+/* Gaya untuk judul utama di dalam artikel (h2) */
+.article2 h2 {
+    /* Kelas Tailwind seperti text-xl, font-semibold, text-slate-200, mb-3, text-center 
+       sudah diterapkan pada tag <h2> di HTML. */
+}
+
+/* Gaya untuk sub-judul di dalam artikel (h3) */
+.article2 h3 {
+    /* Kelas Tailwind seperti text-lg, font-medium, text-indigo-400 (atau text-pink-400), 
+       mt-4, mb-2 sudah diterapkan pada tag <h3> di HTML. */
+}
+
+/* Gaya untuk paragraf di dalam artikel */
+.article2 p {
+    margin-bottom: 0.75rem; /* Setara dengan kelas mb-3 dari Tailwind untuk spasi antar paragraf */
+}
+
+/* Gaya untuk blok rumus di dalam artikel */
+.article2 .font-mono {
+    /* Kelas Tailwind seperti bg-slate-800/60, p-2, rounded, text-center, my-2 
+       sudah diterapkan pada tag <p> yang berisi rumus di HTML. 
+       Ukuran font (text-sm md:text-base) juga diatur di HTML. */
+}
+
+/* Gaya untuk garis horizontal (hr) di dalam artikel */
+.article2 hr {
+    /* Kelas Tailwind border-slate-600 dan my-6 sudah diterapkan pada tag <hr> di HTML. */
+    border-top-width: 1px; /* Memastikan garis horizontal terlihat jelas */
+}
+
+/* Kelas .shadowed untuk menambahkan efek bayangan pada elemen.
+Ini menggunakan nilai bayangan yang mirip dengan utilitas shadow-md dari Tailwind.
+*/
+.shadowed {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* Untuk bayangan yang lebih besar (seperti shadow-lg dari Tailwind):
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+    */
+}
+
+/*
+Kelas .blur untuk menerapkan efek blur pada latar belakang elemen.
+Ini akan berfungsi jika elemen memiliki sedikit transparansi (misalnya, alpha pada warna latar belakang).
+Tag <article> di HTML sudah memiliki kelas bg-slate-700/50 yang membuatnya semi-transparan.
+*/
+.blur {
+    /* Properti backdrop-filter mungkin tidak didukung di semua browser atau 
+    memerlukan prefix vendor untuk versi lama. 
+    Tailwind CSS biasanya menangani ini jika Anda menggunakan utilitas backdrop-blur-nya.
+    Karena kita mendefinisikannya secara manual, kita menuliskannya langsung.
+    */
+    -webkit-backdrop-filter: blur(4px); /* Untuk browser Safari */
+    backdrop-filter: blur(4px);
+}
+
+/*
+Catatan tentang kelas .btn:
+Tombol-tombol di HTML (Konversi, Reverse, Reset) sudah menggunakan kelas utilitas Tailwind secara langsung
+untuk semua gayanya (misalnya, bg-green-600, hover:bg-green-700, py-3, px-6, rounded-lg, dll.).
+Oleh karena itu, tidak perlu mendefinisikan ulang kelas .btn di file CSS ini jika
+Anda mengandalkan Tailwind untuk menangani semua aspek visual tombol tersebut.
+Menambahkan definisi .btn di sini bisa bersifat redundan atau bahkan bertentangan
+jika tidak hati-hati.
+*/
