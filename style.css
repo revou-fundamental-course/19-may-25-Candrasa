@@ -87,14 +87,17 @@ Kelas .blur untuk menerapkan efek blur pada latar belakang elemen.
 Ini akan berfungsi jika elemen memiliki sedikit transparansi (misalnya, alpha pada warna latar belakang).
 Tag <article> di HTML sudah memiliki kelas bg-slate-700/50 yang membuatnya semi-transparan.
 */
+
+/*
 .blur {
     /* Properti backdrop-filter mungkin tidak didukung di semua browser atau 
     memerlukan prefix vendor untuk versi lama. 
     Tailwind CSS biasanya menangani ini jika Anda menggunakan utilitas backdrop-blur-nya.
     Karena kita mendefinisikannya secara manual, kita menuliskannya langsung.
     */
+/*
     -webkit-backdrop-filter: blur(4px); /* Untuk browser Safari */
-    backdrop-filter: blur(4px);
+/*    backdrop-filter: blur(4px);
 }
 
 /*
