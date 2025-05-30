@@ -86,12 +86,12 @@ Ini menggunakan nilai bayangan yang mirip dengan utilitas shadow-md dari Tailwin
 Kelas .blur untuk menerapkan efek blur pada latar belakang elemen.
 Efek ini telah dihapus dari HTML untuk meningkatkan keterbacaan di GitHub Pages.
 Anda dapat menghapus definisi CSS ini jika tidak lagi digunakan.
-*/
+
 .blur {
     -webkit-backdrop-filter: blur(4px); 
     backdrop-filter: blur(4px);
 }
-
+*/
 
 /*
 Catatan tentang kelas .btn:
